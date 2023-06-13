@@ -9,6 +9,8 @@ body{
 }
 
 main{
+  display: grid;
+  gap: 5rem;
   padding: 3rem;
 
   .container{
@@ -22,14 +24,44 @@ main{
   }
 
   form{
+    @media (min-width: 50rem){ max-width: 16rem; }
     display: grid;
     gap: .5rem;
 
-    .inputs{
+    input[type=number]{
+      width: 100%;
+      background: #eee;
+      border: none;
+      border-radius: .25rem;
+      padding: .75rem 1rem;
+    }
+
+    input[type=radio]{
+      display: none;
+      & + label{
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+        &::before{
+          content: '';
+          display: block;
+          width: .8rem;
+          height: .8rem;
+          background: #eee;
+          border: .125rem solid #eee;
+          border-radius: 50%;
+        }
+      }
+      &:checked + label::before{
+        background: #000;
+      }
+    }
+
+    .range-inputs{
       display: flex;
-      gap: .15rem;
-      input{
-        width: 6rem;
+      gap: .16rem;
+      input[type=number]{
+        width: calc(50% - .08rem);
         &:nth-child(1){
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
@@ -41,12 +73,9 @@ main{
       }
     }
 
-    input{
-      width: 100%;
-      background: #eee;
-      border: none;
-      border-radius: .25rem;
-      padding: .75rem 1rem;
+    .methods{
+      display: grid;
+      gap: .3rem;
     }
 
     button{
@@ -64,9 +93,8 @@ main{
     pointer-events: none;
     position: relative;
     isolation: isolate;
-    height: 20rem;
+    min-height: 20rem;
     @media (min-width: 50rem){
-      height: unset;
       align-self: stretch;
       flex: 1;
     }
@@ -133,12 +161,17 @@ main{
       height: .3rem;
       background: #000;
       border-radius: 50%;
+      span{
+        display: block;
+        transform: translate(-50%, -100%);
+      }
     }
   }
 
   .nums{
     overflow-y: scroll;
-    max-height: 30rem;
+    min-width: 8rem;
+    max-height: 39.5rem;
     border: .0625rem solid #eee;
     p{
       font-size: .8rem;
