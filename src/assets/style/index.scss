@@ -1,0 +1,149 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+main{
+  padding: 3rem;
+
+  .container{
+    display: flex;
+    flex-flow: column;
+    @media (min-width: 50rem){
+      flex-flow: row;
+      align-items: flex-start;
+    }
+    gap: 3rem;
+  }
+
+  form{
+    display: grid;
+    gap: .5rem;
+
+    .inputs{
+      display: flex;
+      gap: .15rem;
+      input{
+        width: 6rem;
+        &:nth-child(1){
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &:nth-child(2){
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+
+    input{
+      width: 100%;
+      background: #eee;
+      border: none;
+      border-radius: .25rem;
+      padding: .75rem 1rem;
+    }
+
+    button{
+      cursor: pointer;
+      color: #fff;
+      font-weight: 700;
+      background: #000;
+      border: none;
+      border-radius: .5rem;
+      padding: .75rem 1.75rem;
+    }
+  }
+
+  .graph{
+    pointer-events: none;
+    position: relative;
+    isolation: isolate;
+    height: 20rem;
+    @media (min-width: 50rem){
+      height: unset;
+      align-self: stretch;
+      flex: 1;
+    }
+    border-left: .125rem solid #000;
+    border-bottom: .125rem solid #000;
+    .bg{
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      .vertical, .horizontal{
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: space-evenly;
+        div{
+          background: #ddd;
+        }
+      }
+      .vertical{
+        div{
+          width: .0625rem;
+          height: 100%;
+        }
+      }
+      .horizontal{
+        flex-flow: column;
+        div{
+          width: 100%;
+          height: .0625rem;
+        }
+      }
+    }
+    .axis{
+      .x, .y{
+        position: absolute;
+        inset: 0;
+        width: 104%;
+        display: flex;
+        justify-content: space-between;
+        font-size: .75rem;
+      }
+      .x{
+        height: 102%;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        div{
+          width: 2rem;
+          text-align: center;
+        }
+      }
+      .y{
+        height: 105%;
+        top: 50%;
+        transform: translate(-100%, -50%);
+        align-items: flex-end;
+        flex-flow: column-reverse;
+        padding: 0 .75rem;
+      }
+    }
+    .dot{
+      position: absolute;
+      transform: translate(-50%, 50%);
+      width: .3rem;
+      height: .3rem;
+      background: #000;
+      border-radius: 50%;
+    }
+  }
+
+  .nums{
+    overflow-y: scroll;
+    max-height: 30rem;
+    border: .0625rem solid #eee;
+    p{
+      font-size: .8rem;
+      &:nth-child(2n){ background: #eee; }
+      padding: .5rem 1rem;
+    }
+  }
+}
