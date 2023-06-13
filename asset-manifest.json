@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PRNG/static/css/main.4bbc9655.css",
+    "main.js": "/PRNG/static/js/main.e4cd8c9a.js",
+    "index.html": "/PRNG/index.html",
+    "main.4bbc9655.css.map": "/PRNG/static/css/main.4bbc9655.css.map",
+    "main.e4cd8c9a.js.map": "/PRNG/static/js/main.e4cd8c9a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4bbc9655.css",
+    "static/js/main.e4cd8c9a.js"
+  ]
+}
