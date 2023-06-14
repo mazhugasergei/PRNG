@@ -69,16 +69,16 @@ export default () => {
       else if (value < 0.7) rangeCount[6]++
       else if (value < 0.8) rangeCount[7]++
       else if (value < 0.9) rangeCount[8]++
-      else rangeCount[9]++
+      else if (value < 1) rangeCount[9]++
     }
     return rangeCount
   }
   const correlationAnalysis = () => {
     let correlationArr = []
     
-    for(let N=0; N<1000; N++){
+    for(let N=5; N<1000; N++){
       const numbers = []
-      for(let i=0; i<N; i++){
+      for(let i=0; i<=N; i++){
         const currSeed = Math.random() * 10000
         if(method === 0) numbers.push(middleSquareRandom(currSeed))
         else if(method === 1) numbers.push(middleProductRandom(currSeed))
@@ -86,13 +86,13 @@ export default () => {
         else if(method === 3) numbers.push(linearCongruentialRandom(currSeed, a, b, m))
         else if(method === 4) numbers.push(Math.random())
       }
-      const n = numbers.length;
+      const n = numbers.length
       let sumX = 0
       let sumY = 0
       let sumXY = 0
       let sumX2 = 0
       let sumY2 = 0
-      for (let i = 0; i < n; i++) {
+      for (let i = 0; i < n && numbers[i]; i++) {
         sumX += numbers[i]
         sumY += numbers[(i + 1) % n]
         sumXY += numbers[i] * numbers[(i + 1) % n]
@@ -198,12 +198,14 @@ export default () => {
               </div>
             </div>
             {
-              generatedNumbers.map((generatedNumber, i) => (
-                <div className="dot" style={{
-                  left: `${i / generatedNumbers.length * 100}%`,
-                  bottom: `${generatedNumber.y * 100}%`
-                }} key={`{${generatedNumber.x}, ${generatedNumber.y}}`} />
-              ))
+              generatedNumbers.map((generatedNumber, i) => {
+                if(generatedNumber.y) return (
+                  <div className="dot" style={{
+                    left: `${i / generatedNumbers.length * 100}%`,
+                    bottom: `${generatedNumber.y * 100}%`
+                  }} key={`{${generatedNumber.x}, ${generatedNumber.y}}`} />
+                )
+              })
             }
           </div>
         }
@@ -212,9 +214,11 @@ export default () => {
         {
           generatedNumbers && <div className="col nums">
             {
-              generatedNumbers.map(generatedNumber => (
-                <p key={generatedNumber.x}>{ generatedNumber.y }</p>
-              ))
+              generatedNumbers.map(generatedNumber => {
+                if(generatedNumber.y) return (
+                  <p key={generatedNumber.x}>{ generatedNumber.y }</p>
+                )
+              })
             }
           </div>
         }
@@ -232,6 +236,15 @@ export default () => {
             <div className="bg">
               <div className="vertical"><div/><div/><div/><div/></div>
               <div className="horizontal"><div/><div/><div/><div/></div>
+            </div>
+            <div className="axis">
+              <div className="x">
+                {
+                  yAxis && yAxis.map(y => (
+                    <div key={`x_${y}`}>{ y }</div>
+                  ))
+                }
+              </div>
             </div>
             {
               freqTest100.map((freqTestNum, i) => (
@@ -251,6 +264,15 @@ export default () => {
             <div className="bg">
               <div className="vertical"><div/><div/><div/><div/></div>
               <div className="horizontal"><div/><div/><div/><div/></div>
+            </div>
+            <div className="axis">
+              <div className="x">
+                {
+                  yAxis && yAxis.map(y => (
+                    <div key={`x_${y}`}>{ y }</div>
+                  ))
+                }
+              </div>
             </div>
             {
               freqTest1000.map((freqTestNum, i) => (
@@ -272,14 +294,12 @@ export default () => {
               <div className="horizontal"><div/><div/><div/><div/></div>
             </div>
             {
-              correlationArray.map((correlationArrayNum, i) => {
-                if(correlationArrayNum) return (
-                  <div className="dot" style={{
-                    left: `${i / correlationArray.length * 100}%`,
-                    bottom: `${correlationArrayNum * 50}%`
-                  }} key={`corr_${i}`} />
-                )
-              })
+              correlationArray.map((correlationArrayNum, i) => (
+                <div className="dot" style={{
+                  left: `${i / correlationArray.length * 100}%`,
+                  bottom: `${correlationArrayNum * 50}%`
+                }} key={`corr_${i}`} />
+              ))
             }
           </div>
         }
