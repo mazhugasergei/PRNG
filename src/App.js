@@ -11,7 +11,6 @@ export default () => {
   const [b, setB] = useState(0)
   const [m, setM] = useState(0)
   const [xAxis, setXAxis] = useState()
-  const [yAxis, setYAxis] = useState([0, 0.2, 0.4, 0.6, 0.8, 1])
   const [freqTest100, setFreqTest100] = useState()
   const [freqTest1000, setFreqTest1000] = useState()
   const [correlationArray, setCorrelationArray] = useState()
@@ -191,7 +190,7 @@ export default () => {
               </div>
               <div className="y">
                 {
-                  yAxis && yAxis.map(y => (
+                  [0, 0.2, 0.4, 0.6, 0.8, 1].map(y => (
                     <div key={`y_${y}`}>{ y }</div>
                   ))
                 }
@@ -240,7 +239,7 @@ export default () => {
             <div className="axis">
               <div className="x">
                 {
-                  yAxis && yAxis.map(y => (
+                  [0, 0.2, 0.4, 0.6, 0.8, 1].map(y => (
                     <div key={`x_${y}`}>{ y }</div>
                   ))
                 }
@@ -268,7 +267,7 @@ export default () => {
             <div className="axis">
               <div className="x">
                 {
-                  yAxis && yAxis.map(y => (
+                  [0, 0.2, 0.4, 0.6, 0.8, 1].map(y => (
                     <div key={`x_${y}`}>{ y }</div>
                   ))
                 }
@@ -292,6 +291,15 @@ export default () => {
             <div className="bg">
               <div className="vertical"><div/><div/><div/><div/></div>
               <div className="horizontal"><div/><div/><div/><div/></div>
+            </div>
+            <div className="axis">
+              <div className="x">
+                {
+                  [0, 200, 400, 600, 800, 1000].map(y => (
+                    <div key={`x_${y}`}>{ y }</div>
+                  ))
+                }
+              </div>
             </div>
             {
               correlationArray.map((correlationArrayNum, i) => (
